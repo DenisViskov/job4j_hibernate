@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Objects;
 
 /**
+ * Class is a car brand
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 01.10.2020
@@ -13,13 +15,24 @@ import java.util.Objects;
 @Entity
 @Table(name = "car_brand")
 public class CarBrand {
+
+    /**
+     * ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
 
+    /**
+     * Name
+     */
     @Column(name = "name")
     private String name;
 
+    /**
+     * Models
+     */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @Column(name = "id_model")
     private List<CarModel> models = new ArrayList<>();
