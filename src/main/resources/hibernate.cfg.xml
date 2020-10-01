@@ -20,5 +20,7 @@
 
         <mapping class="ToMany.CarModel"/>
         <mapping class="ToMany.CarBrand"/>
+        <mapping class="ManyToMany.Author"/>
+        <mapping class="ManyToMany.Book"/>
     </session-factory>
 </hibernate-configuration>
