@@ -22,5 +22,7 @@
         <mapping class="ToMany.CarBrand"/>
         <mapping class="ManyToMany.Author"/>
         <mapping class="ManyToMany.Book"/>
+        <mapping class="LazyInitializationexception.BrandCar"/>
+        <mapping class="LazyInitializationexception.ModelCar"/>
     </session-factory>
 </hibernate-configuration>
