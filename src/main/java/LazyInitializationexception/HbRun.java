@@ -81,6 +81,7 @@ public class HbRun {
 
     /**
      * Method return all brand from DB with models
+     *
      * @return List
      */
     public List getBrandsWithModels() {
