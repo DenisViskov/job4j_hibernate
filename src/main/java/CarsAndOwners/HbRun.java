@@ -29,6 +29,33 @@ public class HbRun {
             .buildMetadata()
             .buildSessionFactory();
 
+    public static void main(String[] args) {
+        HbRun hbRun = new HbRun();
+        Car car = new Car();
+        car.setName("audi");
+        Engine engine = new Engine();
+        engine.setName("V8");
+        car.setEngine(engine);
+        Driver first = new Driver("Ivan");
+        Driver second = new Driver("Sergey");
+        car.addDriver(first);
+        car.addDriver(second);
+        hbRun.addEngine(engine);
+        hbRun.addDriver(first);
+        hbRun.addDriver(second);
+        Car out = hbRun.addCar(car);
+        System.out.println(out.getName() + "---------------------------------------------------------");
+
+        out.setName("mazda");
+        hbRun.updateCar(out);
+        out = hbRun.get(Car.class, out.getId());
+        System.out.println(out.getName() + "---------------------------------------------------------");
+
+        hbRun.deleteCar(out);
+        out = hbRun.get(Car.class, out.getId());
+        System.out.println(out + "---------------------------------------------------------");
+    }
+
     /**
      * Method add new car to DB
      *
