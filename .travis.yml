@@ -5,7 +5,8 @@ jdk:
 
 # используем режим обычного пользователя для сборки проекта.
 sudo: false
-before_script: psql -c 'create database cars;' -U postgres
+before_install:
+  - psql -c 'create database cars;' -U postgres
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонни сервис https://codecov.io/
 after_success:
