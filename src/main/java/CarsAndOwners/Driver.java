@@ -7,6 +7,8 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
+ * Class is a driver
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 04.10.2020
@@ -14,11 +16,15 @@ import java.util.Set;
 @Entity
 @Table(name = "drivers")
 public class Driver {
-
+    /**
+     * Id
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    /**
+     * Name
+     */
     @Column(name = "name")
     private String name;
 

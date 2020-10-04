@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
+ * Class is a car
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 04.10.2020
@@ -13,28 +15,38 @@ import java.util.Set;
 @Entity
 @Table(name = "auto")
 public class Car {
+    /**
+     * ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    /**
+     * Name
+     */
     @Column(name = "name")
     private String name;
-
+    /**
+     * Engine
+     */
     @ManyToOne
     @JoinColumn(name = "engine_id")
     private Engine engine;
-
+    /**
+     * Drivers
+     */
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "history_owner",
-            joinColumns = @JoinColumn(name = "driver_id", nullable = false, updatable = false, referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "car_id", nullable = false, updatable = false, referencedColumnName = "id")
-    )
+    @Column(name = "driver_id")
     private Set<Driver> drivers = new HashSet<>();
 
     public Car() {
     }
 
+    /**
+     * Method add driver to drivers set
+     *
+     * @param driver
+     */
     public void addDriver(Driver driver) {
         drivers.add(driver);
     }

@@ -8,6 +8,8 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 /**
+ * Class is HbRun
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 04.10.2020
@@ -27,6 +29,12 @@ public class HbRun {
             .buildMetadata()
             .buildSessionFactory();
 
+    /**
+     * Method add new car to DB
+     *
+     * @param car
+     * @return Car
+     */
     public Car addCar(Car car) {
         Session session = sf.openSession();
         session.beginTransaction();
@@ -36,6 +44,11 @@ public class HbRun {
         return car;
     }
 
+    /**
+     * Method updates given car
+     *
+     * @param car
+     */
     public void updateCar(Car car) {
         Session session = sf.openSession();
         session.beginTransaction();
@@ -44,6 +57,11 @@ public class HbRun {
         session.close();
     }
 
+    /**
+     * Method delete car from db
+     *
+     * @param car
+     */
     public void deleteCar(Car car) {
         Session session = sf.openSession();
         session.beginTransaction();
@@ -52,6 +70,12 @@ public class HbRun {
         session.close();
     }
 
+    /**
+     * Method add driver to DB
+     *
+     * @param driver
+     * @return Driver
+     */
     public Driver addDriver(Driver driver) {
         Session session = sf.openSession();
         session.beginTransaction();
@@ -61,6 +85,11 @@ public class HbRun {
         return driver;
     }
 
+    /**
+     * Method update driver in db
+     *
+     * @param driver
+     */
     public void updateDriver(Driver driver) {
         Session session = sf.openSession();
         session.beginTransaction();
@@ -69,6 +98,11 @@ public class HbRun {
         session.close();
     }
 
+    /**
+     * Method delete driver from DB
+     *
+     * @param driver
+     */
     public void deleteDriver(Driver driver) {
         Session session = sf.openSession();
         session.beginTransaction();
@@ -77,6 +111,12 @@ public class HbRun {
         session.close();
     }
 
+    /**
+     * Method add engine to DB
+     *
+     * @param engine
+     * @return Engine
+     */
     public Engine addEngine(Engine engine) {
         Session session = sf.openSession();
         session.beginTransaction();
@@ -86,6 +126,11 @@ public class HbRun {
         return engine;
     }
 
+    /**
+     * Method update engine in db
+     *
+     * @param engine
+     */
     public void updateEngine(Engine engine) {
         Session session = sf.openSession();
         session.beginTransaction();
@@ -94,6 +139,11 @@ public class HbRun {
         session.close();
     }
 
+    /**
+     * Method delete engine from DB
+     *
+     * @param engine
+     */
     public void deleteEngine(Engine engine) {
         Session session = sf.openSession();
         session.beginTransaction();
@@ -102,6 +152,14 @@ public class HbRun {
         session.close();
     }
 
+    /**
+     * Metho return any object from DB
+     *
+     * @param type
+     * @param id
+     * @param <V>
+     * @return V
+     */
     public <V> V get(Class<?> type, int id) {
         Session session = sf.openSession();
         session.beginTransaction();
@@ -111,6 +169,9 @@ public class HbRun {
         return result;
     }
 
+    /**
+     * Method remove all content from DB
+     */
     public void deleteAllContent() {
         Session session = sf.openSession();
         session.beginTransaction();

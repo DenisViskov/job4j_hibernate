@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.util.Objects;
 
 /**
+ * Class is an engine
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 04.10.2020
@@ -11,10 +13,15 @@ import java.util.Objects;
 @Entity
 @Table(name = "engine")
 public class Engine {
+    /**
+     * ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-
+    /**
+     * Name
+     */
     @Column(name = "name")
     private String name;
 
