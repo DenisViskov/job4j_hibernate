@@ -1,5 +1,7 @@
 package CarsAndOwners;
 
+import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Test;
 
 import java.util.List;
@@ -10,7 +12,7 @@ import static org.hamcrest.core.Is.is;
 
 public class HbRunTest {
 
-    private final HbRun hbRun = new HbRun();
+    private static final HbRun hbRun = new HbRun();
 
     @Test
     public void addCarTest() {
@@ -24,10 +26,11 @@ public class HbRunTest {
         car.addDriver(first);
         car.addDriver(second);
         hbRun.addEngine(engine);
+        hbRun.addDriver(first);
+        hbRun.addDriver(second);
         Car out = hbRun.addCar(car);
         assertThat(out.getName(), is(car.getName()));
         assertThat(out.getDrivers().isEmpty(), is(false));
-        hbRun.deleteAllContent();
     }
 
     @Test
@@ -59,28 +62,8 @@ public class HbRunTest {
         assertNull(out);
     }
 
-    @Test
-    public void addDriverTest() {
+    @AfterClass
+    public static void afterClass() throws Exception {
         hbRun.deleteAllContent();
-    }
-
-    @Test
-    public void updateDriverTest() {
-    }
-
-    @Test
-    public void deleteDriverTest() {
-    }
-
-    @Test
-    public void addEngineTest() {
-    }
-
-    @Test
-    public void updateEngineTest() {
-    }
-
-    @Test
-    public void deleteEngineTest() {
     }
 }
