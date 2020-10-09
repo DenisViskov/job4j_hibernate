@@ -4,6 +4,8 @@ import javax.persistence.*;
 import java.util.Objects;
 
 /**
+ * Class is a vacancy
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 09.10.2020
@@ -11,9 +13,15 @@ import java.util.Objects;
 @Entity
 @Table(name = "vacancy")
 public class Vacancy {
+    /**
+     * ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    /**
+     * name
+     */
     @Column(name = "name")
     private String name;
 

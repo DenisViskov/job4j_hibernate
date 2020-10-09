@@ -6,6 +6,8 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
+ * Class is a base
+ *
  * @author Денис Висков
  * @version 1.0
  * @since 09.10.2020
@@ -13,11 +15,20 @@ import java.util.Set;
 @Entity
 @Table(name = "base")
 public class Base {
+    /**
+     * ID
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "name")
+    /**
+     * Name
+     */
     private String name;
+    /**
+     * Vacancies
+     */
     @OneToMany
     private Set<Vacancy> vacancies = new HashSet<>();
 

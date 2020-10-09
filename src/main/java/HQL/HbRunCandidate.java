@@ -51,7 +51,11 @@ public class HbRunCandidate {
         Base base = new Base(0, "Base");
         Vacancy vacancy = new Vacancy(0, "vacancy");
         base.addVacancy(vacancy);
-
+        runCandidate.saveVacancy(vacancy);
+        runCandidate.saveBase(base);
+        Candidate newCandidate = new Candidate(0, "name", 5, 5000, base);
+        runCandidate.save(newCandidate);
+        Candidate out = runCandidate.getCandidateWithAllAssociatedInstance(5);
     }
 
     /**
@@ -154,6 +158,12 @@ public class HbRunCandidate {
         session.close();
     }
 
+    /**
+     * Method execute save base to DB
+     *
+     * @param base
+     * @return Base
+     */
     public Base saveBase(Base base) {
         Session session = sf.openSession();
         session.beginTransaction();
@@ -163,6 +173,12 @@ public class HbRunCandidate {
         return base;
     }
 
+    /**
+     * Method execute save vacancy to DB
+     *
+     * @param vacancy
+     * @return Vacancy
+     */
     public Vacancy saveVacancy(Vacancy vacancy) {
         Session session = sf.openSession();
         session.beginTransaction();
@@ -170,5 +186,25 @@ public class HbRunCandidate {
         session.getTransaction().commit();
         session.close();
         return vacancy;
+    }
+
+    /**
+     * Method return candidate with all associated instance from DB
+     *
+     * @param id
+     * @return Candidate
+     */
+    public Candidate getCandidateWithAllAssociatedInstance(int id) {
+        Session session = sf.openSession();
+        session.beginTransaction();
+        Candidate candidate = session.createQuery("select distinct c from Candidate c " +
+                "join fetch c.base b " +
+                "join fetch b.vacancies v " +
+                "where c.id = :id", Candidate.class)
+                .setParameter("id", id)
+                .uniqueResult();
+        session.getTransaction().commit();
+        session.close();
+        return candidate;
     }
 }
