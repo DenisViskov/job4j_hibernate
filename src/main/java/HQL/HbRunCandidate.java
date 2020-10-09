@@ -32,9 +32,9 @@ public class HbRunCandidate {
 
     public static void main(String[] args) {
         HbRunCandidate runCandidate = new HbRunCandidate();
-        Candidate first = new Candidate(0, "first", 5, 5000);
-        Candidate second = new Candidate(0, "second", 3, 3000);
-        Candidate third = new Candidate(0, "third", 2, 2000);
+        Candidate first = new Candidate(0, "first", 5, 5000, null);
+        Candidate second = new Candidate(0, "second", 3, 3000, null);
+        Candidate third = new Candidate(0, "third", 2, 2000, null);
         runCandidate.save(first);
         runCandidate.save(second);
         runCandidate.save(third);
@@ -47,6 +47,11 @@ public class HbRunCandidate {
         System.out.println(runCandidate.getById(2));
         runCandidate.insert(second);
         System.out.println(runCandidate.getByName("notFirstsecond").get(0).getName());
+
+        Base base = new Base(0, "Base");
+        Vacancy vacancy = new Vacancy(0, "vacancy");
+        base.addVacancy(vacancy);
+
     }
 
     /**
@@ -147,5 +152,23 @@ public class HbRunCandidate {
                 .executeUpdate();
         session.getTransaction().commit();
         session.close();
+    }
+
+    public Base saveBase(Base base) {
+        Session session = sf.openSession();
+        session.beginTransaction();
+        session.save(base);
+        session.getTransaction().commit();
+        session.close();
+        return base;
+    }
+
+    public Vacancy saveVacancy(Vacancy vacancy) {
+        Session session = sf.openSession();
+        session.beginTransaction();
+        session.save(vacancy);
+        session.getTransaction().commit();
+        session.close();
+        return vacancy;
     }
 }
