@@ -27,5 +27,6 @@
         <mapping class="CarsAndOwners.Engine"/>
         <mapping class="CarsAndOwners.Driver"/>
         <mapping class="CarsAndOwners.Car"/>
+        <mapping class="HQL.Candidate"/>
     </session-factory>
 </hibernate-configuration>
