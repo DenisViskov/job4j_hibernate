@@ -34,15 +34,22 @@ public class Candidate {
      */
     @Column(name = "salary")
     private int salary;
+    /**
+     * Base
+     */
+    @OneToOne
+    @JoinColumn(name = "base_id")
+    private Base base;
 
     public Candidate() {
     }
 
-    public Candidate(int id, String name, int experience, int salary) {
+    public Candidate(int id, String name, int experience, int salary, Base base) {
         this.id = id;
         this.name = name;
         this.experience = experience;
         this.salary = salary;
+        this.base = base;
     }
 
     public int getId() {
@@ -77,6 +84,14 @@ public class Candidate {
         this.salary = salary;
     }
 
+    public Base getBase() {
+        return base;
+    }
+
+    public void setBase(Base base) {
+        this.base = base;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -85,11 +100,12 @@ public class Candidate {
         return id == candidate.id &&
                 experience == candidate.experience &&
                 salary == candidate.salary &&
-                Objects.equals(name, candidate.name);
+                Objects.equals(name, candidate.name) &&
+                Objects.equals(base, candidate.base);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, experience, salary);
+        return Objects.hash(id, name, experience, salary, base);
     }
 }

@@ -32,9 +32,9 @@ public class HbRunCandidate {
 
     public static void main(String[] args) {
         HbRunCandidate runCandidate = new HbRunCandidate();
-        Candidate first = new Candidate(0, "first", 5, 5000);
-        Candidate second = new Candidate(0, "second", 3, 3000);
-        Candidate third = new Candidate(0, "third", 2, 2000);
+        Candidate first = new Candidate(0, "first", 5, 5000, null);
+        Candidate second = new Candidate(0, "second", 3, 3000, null);
+        Candidate third = new Candidate(0, "third", 2, 2000, null);
         runCandidate.save(first);
         runCandidate.save(second);
         runCandidate.save(third);
@@ -47,6 +47,15 @@ public class HbRunCandidate {
         System.out.println(runCandidate.getById(2));
         runCandidate.insert(second);
         System.out.println(runCandidate.getByName("notFirstsecond").get(0).getName());
+
+        Base base = new Base(0, "Base");
+        Vacancy vacancy = new Vacancy(0, "vacancy");
+        base.addVacancy(vacancy);
+        runCandidate.saveVacancy(vacancy);
+        runCandidate.saveBase(base);
+        Candidate newCandidate = new Candidate(0, "name", 5, 5000, base);
+        runCandidate.save(newCandidate);
+        Candidate out = runCandidate.getCandidateWithAllAssociatedInstance(5);
     }
 
     /**
@@ -147,5 +156,55 @@ public class HbRunCandidate {
                 .executeUpdate();
         session.getTransaction().commit();
         session.close();
+    }
+
+    /**
+     * Method execute save base to DB
+     *
+     * @param base
+     * @return Base
+     */
+    public Base saveBase(Base base) {
+        Session session = sf.openSession();
+        session.beginTransaction();
+        session.save(base);
+        session.getTransaction().commit();
+        session.close();
+        return base;
+    }
+
+    /**
+     * Method execute save vacancy to DB
+     *
+     * @param vacancy
+     * @return Vacancy
+     */
+    public Vacancy saveVacancy(Vacancy vacancy) {
+        Session session = sf.openSession();
+        session.beginTransaction();
+        session.save(vacancy);
+        session.getTransaction().commit();
+        session.close();
+        return vacancy;
+    }
+
+    /**
+     * Method return candidate with all associated instance from DB
+     *
+     * @param id
+     * @return Candidate
+     */
+    public Candidate getCandidateWithAllAssociatedInstance(int id) {
+        Session session = sf.openSession();
+        session.beginTransaction();
+        Candidate candidate = session.createQuery("select distinct c from Candidate c " +
+                "join fetch c.base b " +
+                "join fetch b.vacancies v " +
+                "where c.id = :id", Candidate.class)
+                .setParameter("id", id)
+                .uniqueResult();
+        session.getTransaction().commit();
+        session.close();
+        return candidate;
     }
 }
